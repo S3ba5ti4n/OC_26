@@ -1,7 +1,4 @@
 ; Practica 8 - Organizacion de Computadoras
-; Version basada en el sketch del profe
-; putchar, puts, getch y getche con interrupciones (int 0x80)
-; captura tipo fgets, mayusculas y minusculas (reutiliza la Practica 6)
 
 extern canonical_off
 extern canonical_on
@@ -51,7 +48,7 @@ _start:
     call puts
     mov eax, 1                ; Llamada sys_exit
     xor ebx, ebx              ; return 0
-    int 0x80                  ; Fin de programa
+    int 0x80                  ; Fin
 
 ; putchar: muestra en pantalla el caracter contenido en AL
 putchar:
@@ -98,8 +95,8 @@ getch:
     mov ecx, esp
     mov edx, 1
     int 0x80
-    pop eax                   ; AL = tecla
-    push eax                  ; proteger AL
+    pop eax                   
+    push eax                 
     call canonical_on
     pop eax
     pop edx
@@ -123,7 +120,7 @@ getche:
     push eax
     call canonical_on
     pop eax
-    call putchar              ; mostrar la tecla (eco)
+    call putchar              
     pop edx
     pop ecx
     pop ebx

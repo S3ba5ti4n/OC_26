@@ -1,9 +1,4 @@
-; Practica 7 - ATOI e ITOA en ensamblador i386 (NASM, Linux)
-; Captura una cadena numerica, la convierte a entero con signo
-; y despues la vuelve a mostrar como cadena.
-;
-; Convencion: parametros por la pila (se meten de derecha a izquierda),
-; el retorno va en EAX, y quien llama limpia la pila.
+; Practica 7 - ATOI e ITOA en ensamblador i386 
 
 section .data
     msg_in   db "Escribe un numero: ", 0
@@ -11,7 +6,7 @@ section .data
     nl       db 10, 0
 
 section .bss
-    buffer   resb 64            ; cadena capturada (max 64 con el nulo)
+    buffer   resb 64            ; cadena capturada
     outbuf   resb 64            ; cadena resultado de ITOA
 
 section .text
@@ -22,16 +17,16 @@ _start:
     call print_str
     add  esp, 4
 
-    push 64                     ; maximo de caracteres
-    push buffer                 ; direccion del buffer
+    push 64                     ; max
+    push buffer                 ; direccio
     call read_str
     add  esp, 8
 
-    push buffer                 ; ATOI(direccion de cadena)
+    push buffer                 ; ATOI
     call atoi
-    add  esp, 4                 ; EAX = entero con signo
+    add  esp, 4                 ; EAX 
 
-    push 64                     ; ITOA(numero, direccion, longitud)
+    push 64                     ; ITOA
     push outbuf
     push eax
     call itoa
